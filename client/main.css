@@ -11,113 +11,84 @@ body {
 
   padding: 0;
   margin: 0;
-  overflow: scroll;
+  overflow: hidden;
+}
+
+.chat-container {
+  position: absolute;
+  width: 600px;
+  height: 83vh;
+  top: 3.5rem;
+  left: 50%;
+  margin-left: -300px;
+  overflow: hidden;
+  padding: 0 1.5rem !important;
+}
+
+@media screen and (max-width: 359px) {
+  .chat-container {
+    width: 300px;
+    margin-left: -150px;
+    height: 75vh;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 599px) {
+  .chat-container {
+    width: 350px;
+    margin-left: -175px;
+    height: 85vh;
+  }
 }
 
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100%;
+  height: auto;
   background: white;
-}
-
-header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
   position: relative;
 }
 
-#login-buttons {
-  display: block;
-}
-
-h1 {
-  font-size: 1.5em;
-  margin: 0;
-  margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
-}
-
-form {
-  margin-top: 10px;
-  margin-bottom: -10px;
+#scroll-container {
   position: relative;
+  height: 85vh;
+  overflow: scroll;
+  margin-bottom: 2rem;
 }
 
-.new-task input {
-  box-sizing: border-box;
-  padding: 10px 0;
-  background: transparent;
-  border: none;
-  width: 100%;
-  padding-right: 80px;
-  font-size: 1em;
-}
-
-.new-task input:focus {
-  outline: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
-}
-
-.delete {
-  float: right;
-  font-weight: bold;
-  background: none;
-  font-size: 1em;
-  border: none;
-  position: relative;
-}
-
-li,
-time {
-  position: relative;
-  list-style: none;
-  padding: 15px;
-}
-
-li .text {
-  margin-left: 10px;
-}
-
-li.checked {
-  color: #888;
-}
-
-li.checked .text {
-  text-decoration: line-through;
-}
-
-li.private {
-  background: #eee;
-  border-color: #ddd;
-}
-
-header .hide-completed {
-  float: right;
-}
-
-.toggle-private {
-  margin-left: 5px;
-}
-
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
+@media screen and (max-width: 599px) {
+  #scroll-container {
+    height: 75vh;
   }
+}
 
-  .search {
-    width: 150px;
-    clear: both;
+@media screen and (max-width: 599px) and (min-height: 650px) {
+  #scroll-container {
+    height: 75vh;
+    margin: 1rem 0;
   }
+}
 
-  .new-task input {
-    padding-bottom: 5px;
+@media screen and (max-width: 767px) and (orientation: landscape) {
+  #scroll-container {
+    height: 60vh;
+  }
+}
+
+#button-to-top {
+  position: fixed;
+  bottom: 120px;
+  right: 200px;
+}
+
+.chat-text {
+  padding: 1rem 4rem;
+}
+
+@media screen and (max-width: 767px) {
+  #button-to-top {
+    bottom: 85px;
+    right: 10px;
+  }
+  .chat-text {
+    padding: 1rem 2rem;
   }
 }

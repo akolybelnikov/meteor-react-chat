@@ -5,11 +5,19 @@ export default props => {
   const { text, date, user } = props;
   return (
     <p>
-      <span>
-        <Moment date={date} format="hh:mm:ss a:" />{" "}
+      <span className="tag is-light">
+        <Moment date={date} format="hh:mm a" />{" "}
       </span>
-      {user && <span style={{ marginRight: `10px` }}>{user}></span>}
-      <span>{text}</span>
+      {user && (
+        <span className="tag is-light" style={{ marginLeft: `10px` }}>
+          {user}
+        </span>
+      )}
+      <div
+        className="content has-text-black-ter chat-text"
+      >
+        <p className="has-background-white-bis">{text}</p>
+      </div>
     </p>
   );
 };

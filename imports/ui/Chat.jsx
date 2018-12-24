@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-export default class Hello extends Component {
+
+export default class Chat extends Component {
   state = {
-    counter: 0,
-  }
+    counter: 0
+  };
 
   increment() {
     this.setState({
