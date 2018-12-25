@@ -40,7 +40,7 @@ body {
   padding: 0 1.5rem !important;
 }
 
-.chat-items-holder {
+.chat-items-holder, .user-items-holder {
   background-color: #315481;
   background-image: linear-gradient(to bottom, #315481, #918e82 100%);
   background-attachment: fixed;
@@ -48,6 +48,10 @@ body {
   position: relative;
   width: 400px;
   margin: 0 auto;
+}
+
+.user-items-holder {
+  display: flex;
 }
 
 .tool-bar {
@@ -104,9 +108,10 @@ body {
     bottom: 30px;
   }
 
-  .chat-items-holder {
+  .chat-items-holder, .user-items-holder {
     width: 250px;
   }
+
 }
 
 @media screen and (min-width: 360px) and (max-width: 599px) {
@@ -126,7 +131,7 @@ body {
     bottom: 30px;
   }
 
-  .chat-items-holder {
+  .chat-items-holder, .user-items-holder {
     width: 350px;
   }
 }

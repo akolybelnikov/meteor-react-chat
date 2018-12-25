@@ -15,7 +15,7 @@ export default ({ activeState, chats, users }) => {
       )}
 
       {activeState === "users" && (
-        <main className="section user-items">
+        <main className="section chat-items">
           <div className="user-items-holder">
             {users &&
               users.map(user => <UserItem key={user._id} user={user} />)}

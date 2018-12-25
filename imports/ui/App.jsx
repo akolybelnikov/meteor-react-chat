@@ -11,7 +11,7 @@ import Routes from "./Routes";
 
 class App extends React.Component {
   state = {
-    activeState: "chats"
+    activeState: "users"
   };
   render() {
     const { currentUser, users, chats } = this.props;

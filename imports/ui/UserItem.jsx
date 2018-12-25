@@ -13,7 +13,16 @@ const UserItem = ({ user, chats, history }) => {
       });
     }
   };
-  return <div />;
+  return (
+    <a style={{ cursor: "pointer" }} onClick={onGoToChat} className="card">
+      <div className="card-content">{user.username}</div>
+      <div style={{ justifyContent: "center" }} className="card-footer">
+        <span className="icon has-text-primary">
+          <i className="fas fa-arrow-right" />
+        </span>
+      </div>
+    </a>
+  );
 };
 
 export default withTracker(({ user }) => {
