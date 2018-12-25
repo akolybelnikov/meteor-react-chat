@@ -13,21 +13,26 @@ body {
   margin: 0;
   overflow: hidden;
 
-  font-family: 'Comfortaa', cursive !important;
+  font-family: "Comfortaa", cursive !important;
 }
 
 #grid {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
 }
 
-.chat-container {
+.fill-in {
+  flex: 0 1 10%;
+}
+
+.chat-container,
+.chat-items {
   position: absolute;
   width: 600px;
-  height: 83vh;
+  height: 77vh;
   top: 3.5rem;
   left: 51%;
   margin-left: -300px;
@@ -35,10 +40,20 @@ body {
   padding: 0 1.5rem !important;
 }
 
+.chat-items-holder {
+  background-color: #315481;
+  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-attachment: fixed;
+  margin-block-start: 1rem;
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+}
+
 .tool-bar {
   left: 50% !important;
-  margin-left: -300px;
-  width: 625px;
+  margin-left: -293px;
+  width: 600px;
   padding: 0 1.5rem !important;
 }
 
@@ -50,14 +65,14 @@ body {
 
 #scroll-container {
   position: relative;
-  height: 85vh;
+  height: 81vh;
   overflow: scroll;
   margin-bottom: 2rem;
 }
 
 #button-to-top {
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   right: 4%;
   z-index: 20;
 }
@@ -72,7 +87,7 @@ body {
   .chat-container {
     width: 300px;
     margin-left: -153px;
-    height: 80vh;
+    height: 69vh;
   }
 
   .tool-bar {
@@ -87,6 +102,10 @@ body {
 
   #button-to-top {
     bottom: 30px;
+  }
+
+  .chat-items-holder {
+    width: 250px;
   }
 }
 
@@ -106,11 +125,15 @@ body {
   #button-to-top {
     bottom: 30px;
   }
+
+  .chat-items-holder {
+    width: 350px;
+  }
 }
 
 @media screen and (max-width: 599px) {
   #scroll-container {
-    height: 75vh;
+    height: 72vh;
   }
 }
 

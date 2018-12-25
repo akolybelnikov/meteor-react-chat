@@ -29,7 +29,7 @@ const InputBar = ({ scrollToWithContainer }) => {
       style={{
         padding: `0 .5rem`,
         position: `fixed`,
-        bottom: 20,
+        bottom: '3.75rem',
         zIndex: 10
       }}
     >

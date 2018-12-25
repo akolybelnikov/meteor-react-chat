@@ -11,7 +11,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  "messages.insert"(text) {
+  "messages.insert"(text, chat) {
     check(text, String);
 
     if (!this.userId) {
@@ -22,6 +22,7 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: this.userId,
+      chat,
       username: Meteor.users.findOne(this.userId).username
     });
   }
