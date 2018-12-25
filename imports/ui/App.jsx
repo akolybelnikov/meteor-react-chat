@@ -7,10 +7,12 @@ import ChatItem from "./ChatItem";
 import Footer from "./Footer";
 import Header from "./Header";
 import Grid from "./SVG/grid";
+import Main, { Section } from "./Main";
+import UserItem from './UserItem'
 
 class App extends React.Component {
   render() {
-    const { currentUser, users } = this.props;
+    const { currentUser, users, chats } = this.props;
     return (
       <React.Fragment>
         <Header currentUser={currentUser} />
@@ -22,14 +24,32 @@ class App extends React.Component {
           </div>
         )}
         {currentUser && (
-          <main className="section chat-items">
-            <div className="chat-items-holder">
-              {users &&
-                users.map(user => <ChatItem key={user._id} person={user} />)}
-            </div>
-          </main>
+          <React.Fragment>
+            <Main>
+              <Section isActive="chats">
+                <main className="section chat-items">
+                  <div className="chat-items-holder">
+                    {chats &&
+                      chats.map(chat => (
+                        <ChatItem key={chat._id} chat={chat} />
+                      ))}
+                  </div>
+                </main>
+              </Section>
+              <Section isActive="users">
+                <main className="section user-items">
+                  <div className="user-items-holder">
+                    {users &&
+                      users.map(user => (
+                        <UserItem key={user._id} person={user} />
+                      ))}
+                  </div>
+                </main>
+              </Section>
+            </Main>
+            <Footer />
+          </React.Fragment>
         )}
-        <Footer />
       </React.Fragment>
     );
   }
