@@ -4,7 +4,7 @@ import Moment from "react-moment";
 export default props => {
   const { text, date, user } = props;
   return (
-    <p>
+    <div>
       <span className="tag is-light">
         <Moment date={date} format="hh:mm a" />{" "}
       </span>
@@ -18,6 +18,6 @@ export default props => {
       >
         <p className="has-background-white-bis">{text}</p>
       </div>
-    </p>
+    </div>
   );
 };

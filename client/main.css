@@ -25,11 +25,24 @@ body {
   padding: 0 1.5rem !important;
 }
 
+.tool-bar {
+  left: 50% !important;
+  margin-left: -300px;
+  width: 625px;
+  padding: 0 1.5rem !important;
+}
+
 @media screen and (max-width: 359px) {
   .chat-container {
     width: 300px;
     margin-left: -150px;
     height: 75vh;
+  }
+
+  .tool-bar {
+    left: 50% !important;
+    margin-left: -150px;
+    width: 300px;
   }
 }
 
@@ -38,6 +51,12 @@ body {
     width: 350px;
     margin-left: -175px;
     height: 85vh;
+  }
+
+  .tool-bar {
+    left: 50% !important;
+    margin-left: -175px;
+    width: 350px;
   }
 }
 
@@ -62,7 +81,7 @@ body {
 
 @media screen and (max-width: 599px) and (min-height: 650px) {
   #scroll-container {
-    height: 75vh;
+    height: 79vh;
     margin: 1rem 0;
   }
 }
@@ -75,20 +94,34 @@ body {
 
 #button-to-top {
   position: fixed;
-  bottom: 120px;
-  right: 200px;
+  bottom: 11%;
+  right: 23%
 }
 
 .chat-text {
   padding: 1rem 4rem;
 }
 
+#typing-alert {
+  position: sticky;
+  bottom: 20px;
+}
+
 @media screen and (max-width: 767px) {
-  #button-to-top {
-    bottom: 85px;
-    right: 10px;
-  }
   .chat-text {
     padding: 1rem 2rem;
   }
+  #login-dropdown-list {
+    left: -170px;
+  }
+
+  #button-to-top {
+    bottom: 15%;
+    right: 3%
+  }
+
+  #typing-alert {
+    bottom: auto;
+  }
 }
+
