@@ -12,6 +12,16 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+
+  font-family: 'Comfortaa', cursive !important;
+}
+
+#grid {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .chat-container {

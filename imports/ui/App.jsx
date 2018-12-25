@@ -9,6 +9,7 @@ import Indicator from "./Indicator";
 import InputBar from "./InputBar";
 import Message from "./Message";
 import TopArrow from "./TopArrow";
+import Grid from "./SVG/grid";
 
 class App extends React.Component {
   componentDidMount() {
@@ -24,17 +25,16 @@ class App extends React.Component {
     ));
   };
 
-  goToContainer = new Promise((resolve, reject) => {
-    Events.scrollEvent.register("end", () => {
-      resolve();
-      Events.scrollEvent.remove("end");
-    });
-
-    scroller.scrollTo("scroll-container");
-  });
-
   scrollToWithContainer = () => {
-    this.goToContainer.then(() =>
+    goToContainer = new Promise((resolve, reject) => {
+      Events.scrollEvent.register("end", () => {
+        resolve();
+        Events.scrollEvent.remove("end");
+      });
+
+      scroller.scrollTo("scroll-container");
+    });
+    goToContainer.then(() =>
       scroller.scrollTo(`message-${this.props.messages.length - 1}`, {
         duration: 800,
         delay: 0,
@@ -45,7 +45,15 @@ class App extends React.Component {
   };
 
   scrollToTopWithContainer = () => {
-    this.goToContainer.then(() =>
+    goToContainer = new Promise((resolve, reject) => {
+      Events.scrollEvent.register("end", () => {
+        resolve();
+        Events.scrollEvent.remove("end");
+      });
+
+      scroller.scrollTo("scroll-container");
+    });
+    goToContainer.then(() =>
       scroller.scrollTo(`scroll-top`, {
         duration: 800,
         delay: 0,
@@ -56,7 +64,15 @@ class App extends React.Component {
   };
 
   scrollToBttmWithContainer = () => {
-    this.goToContainer.then(() =>
+    goToContainer = new Promise((resolve, reject) => {
+      Events.scrollEvent.register("end", () => {
+        resolve();
+        Events.scrollEvent.remove("end");
+      });
+
+      scroller.scrollTo("scroll-container");
+    });
+    goToContainer.then(() =>
       scroller.scrollTo(`scroll-bottom`, {
         duration: 800,
         delay: 0,
@@ -71,6 +87,12 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header currentUser={currentUser} />
+        {!currentUser && (
+          <div id="grid">
+            <Grid />
+            <h2 className="title has-text-primary" style={{marginBlockStart: '30px'}}>Simply Chat</h2>
+          </div>
+        )}ˀ
         {currentUser && (
           <main className="section chat-container">
             <div className="container">
@@ -84,9 +106,6 @@ class App extends React.Component {
                 >
                   {messages && this.renderMessages(messages)}
                 </div>
-                <TopArrow
-                  scrollToTopWithContainer={this.scrollToTopWithContainer}
-                />
                 <Element id="scroll-bottom" />
               </Element>
               <div id="typing-alert">
@@ -95,6 +114,9 @@ class App extends React.Component {
                     <Indicator key={user._id} username={user.username} />
                   ))}
               </div>
+              <TopArrow
+                scrollToTopWithContainer={this.scrollToTopWithContainer}
+              />
             </div>
           </main>
         )}
