@@ -4,8 +4,6 @@ import { Element, Events, scroller } from "react-scroll";
 import { Messages } from "../api/messages";
 import { Users } from "../api/users";
 import DateBar from "./DateBar";
-import Footer from "./Footer";
-import Header from "./Header";
 import Indicator from "./Indicator";
 import InputBar from "./InputBar";
 import Message from "./Message";
@@ -85,7 +83,6 @@ class App extends React.Component {
     const { messages, users } = this.props;
     return (
       <React.Fragment>
-        <Header currentUser={Meteor.user()} />
         <section className="section chat-container">
           <div className="container">
             <InputBar scrollToWithContainer={this.scrollToWithContainer} />
@@ -110,7 +107,6 @@ class App extends React.Component {
           </div>
         </section>
         )
-        <Footer />
       </React.Fragment>
     );
   }

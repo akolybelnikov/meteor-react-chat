@@ -1,16 +1,17 @@
-import createBrowserHistory from "history/createBrowserHistory";
 import React from "react";
-import { Route, Router, Switch } from "react-router";
+import { Switch } from "react-router";
 import Chat from "./Chat";
-import App from './App'
+import Home from "./Home";
+import RouteWithProps from "./RouteWithProps";
 
-const browserHistory = createBrowserHistory();
-
-export const renderRoutes = () => (
-  <Router history={browserHistory}>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route exact path="/chats/:id" component={Chat} />
-    </Switch>
-  </Router>
+export default ({ childProps }) => (
+  <Switch>
+    <RouteWithProps exact path="/" component={Home} props={childProps} />
+    <RouteWithProps
+      exact
+      path="/chats/:id"
+      component={Chat}
+      props={childProps}
+    />
+  </Switch>
 );

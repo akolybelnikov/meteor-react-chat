@@ -3,16 +3,23 @@ import React from "react";
 import { Chats } from "../api/chats";
 import { Messages } from "../api/messages";
 import { Users } from "../api/users";
-import ChatItem from "./ChatItem";
 import Footer from "./Footer";
 import Header from "./Header";
 import Grid from "./SVG/grid";
-import Main, { Section } from "./Main";
-import UserItem from './UserItem'
+
+import Routes from "./Routes";
 
 class App extends React.Component {
+  state = {
+    activeState: "chats"
+  };
   render() {
     const { currentUser, users, chats } = this.props;
+    const childProps = {
+      activeState: this.state.activeState,
+      users: users,
+      chats: chats
+    };
     return (
       <React.Fragment>
         <Header currentUser={currentUser} />
@@ -25,29 +32,11 @@ class App extends React.Component {
         )}
         {currentUser && (
           <React.Fragment>
-            <Main>
-              <Section isActive="chats">
-                <main className="section chat-items">
-                  <div className="chat-items-holder">
-                    {chats &&
-                      chats.map(chat => (
-                        <ChatItem key={chat._id} chat={chat} />
-                      ))}
-                  </div>
-                </main>
-              </Section>
-              <Section isActive="users">
-                <main className="section user-items">
-                  <div className="user-items-holder">
-                    {users &&
-                      users.map(user => (
-                        <UserItem key={user._id} person={user} />
-                      ))}
-                  </div>
-                </main>
-              </Section>
-            </Main>
-            <Footer />
+            <Routes childProps={childProps} />
+            <Footer
+              users={() => this.setState({ activeState: "users" })}
+              chats={() => this.setState({ activeState: "chats" })}
+            />
           </React.Fragment>
         )}
       </React.Fragment>
