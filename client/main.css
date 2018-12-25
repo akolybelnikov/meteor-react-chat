@@ -19,7 +19,7 @@ body {
   width: 600px;
   height: 83vh;
   top: 3.5rem;
-  left: 50%;
+  left: 51%;
   margin-left: -300px;
   overflow: hidden;
   padding: 0 1.5rem !important;
@@ -30,34 +30,6 @@ body {
   margin-left: -300px;
   width: 625px;
   padding: 0 1.5rem !important;
-}
-
-@media screen and (max-width: 359px) {
-  .chat-container {
-    width: 300px;
-    margin-left: -150px;
-    height: 75vh;
-  }
-
-  .tool-bar {
-    left: 50% !important;
-    margin-left: -150px;
-    width: 300px;
-  }
-}
-
-@media screen and (min-width: 360px) and (max-width: 599px) {
-  .chat-container {
-    width: 350px;
-    margin-left: -175px;
-    height: 85vh;
-  }
-
-  .tool-bar {
-    left: 50% !important;
-    margin-left: -175px;
-    width: 350px;
-  }
 }
 
 .container {
@@ -73,6 +45,59 @@ body {
   margin-bottom: 2rem;
 }
 
+#button-to-top {
+  position: absolute;
+  bottom: 40px;
+  right: 4%;
+  z-index: 20;
+}
+
+.typing-tag {
+  display: flex;
+  align-items: end;
+  width: 200px;
+}
+
+@media screen and (max-width: 359px) {
+  .chat-container {
+    width: 300px;
+    margin-left: -153px;
+    height: 80vh;
+  }
+
+  .tool-bar {
+    left: 50% !important;
+    margin-left: -150px;
+    width: 300px;
+  }
+
+  .typing-tag {
+    width: 150px;
+  }
+
+  #button-to-top {
+    bottom: 30px;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 599px) {
+  .chat-container {
+    width: 350px;
+    margin-left: -175px;
+    height: 85vh;
+  }
+
+  .tool-bar {
+    left: 50% !important;
+    margin-left: -170px;
+    width: 350px;
+  }
+
+  #button-to-top {
+    bottom: 30px;
+  }
+}
+
 @media screen and (max-width: 599px) {
   #scroll-container {
     height: 75vh;
@@ -81,7 +106,7 @@ body {
 
 @media screen and (max-width: 599px) and (min-height: 650px) {
   #scroll-container {
-    height: 79vh;
+    height: 76vh;
     margin: 1rem 0;
   }
 }
@@ -92,36 +117,22 @@ body {
   }
 }
 
-#button-to-top {
-  position: fixed;
-  bottom: 11%;
-  right: 23%
-}
-
 .chat-text {
   padding: 1rem 4rem;
 }
 
 #typing-alert {
-  position: sticky;
-  bottom: 20px;
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
 }
 
 @media screen and (max-width: 767px) {
   .chat-text {
     padding: 1rem 2rem;
   }
-  #login-dropdown-list {
-    left: -170px;
-  }
-
-  #button-to-top {
-    bottom: 15%;
-    right: 3%
-  }
-
-  #typing-alert {
-    bottom: auto;
+  #login-dropdown-list.accounts-dialog {
+    left: -50px;
+    top: 50px;
   }
 }
-
