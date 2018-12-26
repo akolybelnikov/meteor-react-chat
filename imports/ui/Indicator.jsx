@@ -14,7 +14,7 @@ const Indicator = props => {
               {users.length && users[0].username}
             </span>
             <span>
-              is typing <Dots />
+              is typing <Dots fill="#00d1b2"/>
             </span>
           </p>
         </div>

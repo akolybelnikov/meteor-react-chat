@@ -20,9 +20,9 @@ class App extends React.Component {
         <ErrorBoundary>
           <Header currentUser={currentUser} />
           {!currentUser && (
-            <div id="grid">
+            <div className="grid">
               <div className="fill-in" />
-              <Grid />
+              <Grid fill="#fff" />
               <h2 className="title has-text-primary">Simply Chat</h2>
             </div>
           )}

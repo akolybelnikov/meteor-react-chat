@@ -1,7 +1,6 @@
 import { withTracker } from "meteor/react-meteor-data";
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { Users } from "../api/users";
 import { Chats } from "../api/chats";
 import Avatar from "./AvatarMock";
 
@@ -15,11 +14,16 @@ const ChatItem = ({ chats, history, user }) => {
       });
     }
   };
-  
+
   return (
     <article
       className="media has-background-white-bis"
-      style={{ alignItems: "center", paddingTop: "0px", borderTop: "none" }}
+      style={{
+        alignItems: "center",
+        paddingTop: "0px",
+        borderTop: "none",
+        marginTop: "0.2rem"
+      }}
     >
       <Avatar name={"media-left"} />
       <div className="media-content">
@@ -57,18 +61,5 @@ export default withTracker(({ user }) => {
         }
       ]
     }).fetch()
-    // users: Users.find({
-    //   $or: [
-    //     {
-    //       $and: [{ _id: { $eq: chat.user } }, { _id: { $ne: Meteor.userId() } }]
-    //     },
-    //     {
-    //       $and: [
-    //         { _id: { $eq: chat.owner } },
-    //         { _id: { $ne: Meteor.userId() } }
-    //       ]
-    //     }
-    //   ]
-    // }).fetch()
   };
 })(withRouter(ChatItem));

@@ -1,13 +1,13 @@
 import React from "react";
 
-export default () => {
+export default ({ fill }) => {
   return (
     <svg
       width="105"
       height="105"
       viewBox="0 0 105 105"
       xmlns="http://www.w3.org/2000/svg"
-      fill="#fff"
+      fill={fill}
     >
       <circle cx="12.5" cy="12.5" r="12.5">
         <animate

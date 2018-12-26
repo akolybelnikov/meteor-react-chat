@@ -1,4 +1,6 @@
 import React from "react";
+import Grid from "./SVG/grid";
+import { withRouter } from "react-router-dom";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -14,13 +16,26 @@ class ErrorBoundary extends React.Component {
     console.error(error, info);
   }
 
+  reload = () => {
+    this.props.history.push("/");
+    window.location.reload();
+  };
+
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return (
+        <div className="grid">
+          <h2 className="subtitle has-text-info">Something went wrong</h2>
+          <Grid fill="#00d1b2" />
+          <button onClick={this.reload} className="button is-success">
+            Go back to safety
+          </button>
+        </div>
+      );
     }
 
     return this.props.children;
   }
 }
 
-export default ErrorBoundary;
+export default withRouter(ErrorBoundary);
