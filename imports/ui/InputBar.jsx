@@ -28,6 +28,10 @@ const InputBar = ({ scroll, chat }) => {
     form.reset();
   };
 
+  click = (e) => {
+    console.log(e)
+  }
+
   return (
     <div
       className="tool-bar"
@@ -40,7 +44,7 @@ const InputBar = ({ scroll, chat }) => {
     >
       <Form onSubmit={this.onSubmitMessage}>
         <FieldTemplate clearForm={resetForm} getState={setStateNotTyping}>
-          <div className="control has-icons-left is-expanded">
+          <div style={{flex: '1 1 auto'}} className="control has-icons-left has-icons-right is-expanded">
             <Text
               className="input is-large is-primary"
               field="text"
@@ -51,7 +55,15 @@ const InputBar = ({ scroll, chat }) => {
             <span className="icon is-large is-left has-text-primary">
               <i className="fas fa-comment" />
             </span>
+            
           </div>
+          <button
+              style={{ cursor: "pointer", zIndex: 20 }}
+              type="submit"
+              className="is-large button is-primary"
+            >
+              <i className="fas fa-paper-plane" />
+            </button>
         </FieldTemplate>
       </Form>
     </div>
@@ -67,7 +79,7 @@ const ComposeMessage = props => {
     getState(formApi);
   };
 
-  return <div className="field">{props.children}</div>;
+  return <div className="field" style={{display: 'flex'}}>{props.children}</div>;
 };
 
 const FieldTemplate = withFormApi(ComposeMessage);

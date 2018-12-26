@@ -86,11 +86,15 @@ body {
   width: 200px;
 }
 
+.message-outer {
+  width: 100%;
+}
+
 @media screen and (max-width: 359px) {
   .chat-container {
     width: 100%;
     margin-left: -50%;
-    height: 78vh;
+    height: 70vh;
   }
 
   .tool-bar {
@@ -175,5 +179,11 @@ body {
   #login-dropdown-list.accounts-dialog {
     left: -50px;
     top: 50px;
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  .message-outer {
+    width: 60%;
   }
 }

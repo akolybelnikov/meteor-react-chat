@@ -11,16 +11,13 @@ const Message = props => {
     if (messages[0].owner !== Meteor.userId() && !messages[0].checked) {
       Meteor.call("messages.markAsRead", messages[0]._id);
     }
-  }
+  };
 
   return (
-    <LazyLoad
-      offsetVertical={10}
-      onContentVisible={onMessageSeen}
-    >
+    <LazyLoad offsetVertical={10} onContentVisible={onMessageSeen}>
       <div
+        className="message-outer"
         style={{
-          width: "100%",
           display: "flex",
           justifyContent:
             username === Meteor.user().username ? "flex-end" : "start",
@@ -58,6 +55,6 @@ export default withTracker(({ id }) => {
   return {
     messages: Messages.find({
       _id: { $eq: id }
-    }).fetch(),
+    }).fetch()
   };
 })(Message);

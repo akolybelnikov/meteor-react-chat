@@ -7,12 +7,16 @@ import { Messages } from "../api/messages";
 import Indicator from "./Indicator";
 import InputBar from "./InputBar";
 import Message from "./Message";
-import nameTag from './NameTag'
+import nameTag from "./NameTag";
 import NameTag from "./NameTag";
 
 class Chat extends React.Component {
   componentDidMount() {
     setTimeout(() => this.scrollToBttmWithContainer(), 500);
+    Meteor.call("users.setState", false);
+  }
+
+  componentWillUnmount() {
     Meteor.call("users.setState", false);
   }
 
@@ -54,7 +58,7 @@ class Chat extends React.Component {
       <React.Fragment>
         <section className="section chat-container">
           <div className="container">
-          <NameTag chat={chats[0]} />
+            {chats.length && <NameTag chat={chats[0]} />}
             <InputBar
               scroll={this.scrollToBttmWithContainer}
               chat={this.props.location.pathname.split("/")[2]}
@@ -65,13 +69,12 @@ class Chat extends React.Component {
               <div style={{ padding: `1rem`, position: "relative" }}>
                 {messages && this.renderMessages(messages)}
               </div>
-             
+
               <Element id="scroll-bottom" />
-              
             </Element>
             <div id="typing-alert">
-                {chats.length && <Indicator chat={chats[0]} />}
-              </div>
+              {chats.length && <Indicator chat={chats[0]} />}
+            </div>
           </div>
         </section>
         )

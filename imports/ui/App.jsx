@@ -3,6 +3,7 @@ import React from "react";
 import { Chats } from "../api/chats";
 import { Messages } from "../api/messages";
 import { Users } from "../api/users";
+import { Presences } from "../api/presence";
 import ErrorBoundary from "./Error";
 import Header from "./Header";
 import Routes from "./Routes";
@@ -10,11 +11,12 @@ import Grid from "./SVG/grid";
 
 class App extends React.Component {
   render() {
-    const { currentUser, users, chats } = this.props;
+    const { currentUser, users, chats, presence } = this.props;
     const childProps = {
       users: users,
       chats: chats
     };
+
     return (
       <React.Fragment>
         <ErrorBoundary>
@@ -41,8 +43,10 @@ export default withTracker(() => {
   Meteor.subscribe("messages");
   Meteor.subscribe("users");
   Meteor.subscribe("chats");
+  Meteor.subscribe("userPresence");
 
   return {
+    presence: Presences.find({}).fetch(),
     chats: Chats.find({
       $or: [
         { owner: { $eq: Meteor.userId() } },
