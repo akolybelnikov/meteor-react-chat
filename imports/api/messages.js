@@ -23,7 +23,15 @@ Meteor.methods({
       createdAt: new Date(),
       owner: this.userId,
       chat,
-      username: Meteor.users.findOne(this.userId).username
+      username: Meteor.users.findOne(this.userId).username,
+      checked: false
     });
+  },
+  "messages.markAsRead"() {
+    if (!this.userId) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Users.update(this.userId, { $set: { typing: state } });
   }
 });

@@ -6,12 +6,12 @@ import { Users } from "../api/users";
 import Footer from "./Footer";
 import Header from "./Header";
 import Grid from "./SVG/grid";
-
+import ErrorBoundary from "./Error";
 import Routes from "./Routes";
 
 class App extends React.Component {
   state = {
-    activeState: "users"
+    activeState: "chats"
   };
   render() {
     const { currentUser, users, chats } = this.props;
@@ -21,25 +21,27 @@ class App extends React.Component {
       chats: chats
     };
     return (
-      <React.Fragment>
-        <Header currentUser={currentUser} />
-        {!currentUser && (
-          <div id="grid">
-            <div className="fill-in" />
-            <Grid />
-            <h2 className="title has-text-primary">Simply Chat</h2>
-          </div>
-        )}
-        {currentUser && (
-          <React.Fragment>
-            <Routes childProps={childProps} />
-            <Footer
-              users={() => this.setState({ activeState: "users" })}
-              chats={() => this.setState({ activeState: "chats" })}
-            />
-          </React.Fragment>
-        )}
-      </React.Fragment>
+      <ErrorBoundary>
+        <React.Fragment>
+          <Header currentUser={currentUser} />
+          {!currentUser && (
+            <div id="grid">
+              <div className="fill-in" />
+              <Grid />
+              <h2 className="title has-text-primary">Simply Chat</h2>
+            </div>
+          )}
+          {currentUser && (
+            <React.Fragment>
+              <Routes childProps={childProps} />
+              <Footer
+                users={() => this.setState({ activeState: "users" })}
+                chats={() => this.setState({ activeState: "chats" })}
+              />
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      </ErrorBoundary>
     );
   }
 }
@@ -50,11 +52,16 @@ export default withTracker(() => {
   Meteor.subscribe("chats");
 
   return {
-    chats: Chats.find({}).fetch(),
+    chats: Chats.find({
+      $or: [
+        { owner: { $eq: Meteor.userId() } },
+        { user: { $eq: Meteor.userId() } }
+      ]
+    }).fetch(),
     messages: Messages.find({}).fetch(),
     currentUser: Meteor.user(),
     users: Users.find({
-      $and: [{ _id: { $ne: Meteor.userId() } }]
+      _id: { $ne: Meteor.userId() }
     }).fetch()
   };
 })(App);

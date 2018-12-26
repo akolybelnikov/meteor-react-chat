@@ -1,44 +1,25 @@
 import { withTracker } from "meteor/react-meteor-data";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Element, Events, scroller } from "react-scroll";
+import { Chats } from "../api/chats";
 import { Messages } from "../api/messages";
-import { Users } from "../api/users";
-import DateBar from "./DateBar";
 import Indicator from "./Indicator";
 import InputBar from "./InputBar";
 import Message from "./Message";
 import TopArrow from "./TopArrow";
 
-class App extends React.Component {
+class Chat extends React.Component {
   componentDidMount() {
     setTimeout(() => this.scrollToBttmWithContainer(), 500);
     Meteor.call("users.setState", false);
+    console.log(this.props.location)
   }
 
   renderMessages = messages => {
     return messages.map((msg, index) => (
-      <Element key={index} id={`message-${index}`}>
-        <Message text={msg.text} date={msg.createdAt} user={msg.username} />
-      </Element>
+      <Message key={index} text={msg.text} username={msg.username} checked={msg.checked} />
     ));
-  };
-
-  scrollToWithContainer = () => {
-    let goToContainer = new Promise((resolve, reject) => {
-      Events.scrollEvent.register("end", () => {
-        resolve();
-        Events.scrollEvent.remove("end");
-      });
-
-      scroller.scrollTo("scroll-container");
-    });
-    goToContainer.then(() =>
-      scroller.scrollTo(`message-${this.props.messages.length - 1}`, {
-        duration: 100,
-        delay: 0,
-        containerId: "scroll-container"
-      })
-    );
   };
 
   scrollToTopWithContainer = () => {
@@ -80,27 +61,27 @@ class App extends React.Component {
   };
 
   render() {
-    const { messages, users } = this.props;
+    const { messages, chats } = this.props;
+
     return (
       <React.Fragment>
         <section className="section chat-container">
           <div className="container">
-            <InputBar scrollToWithContainer={this.scrollToWithContainer} />
+            <div id="typing-alert">
+              {chats.length && <Indicator chat={chats[0]} />}
+            </div>
+            <InputBar
+              scroll={this.scrollToBttmWithContainer}
+              chat={this.props.location.pathname.split("/")[2]}
+            />
             <Element id="scroll-container">
-              <Element style={{ padding: "1rem" }} id="scroll-top">
-                <DateBar />
-              </Element>
-              <div style={{ padding: `1rem 1rem 2rem`, position: "relative" }}>
+              <Element style={{ padding: "1rem" }} id="scroll-top" />
+              <div style={{ padding: `1rem 1rem 6rem`, position: "relative" }}>
                 {messages && this.renderMessages(messages)}
               </div>
               <Element id="scroll-bottom" />
             </Element>
-            <div id="typing-alert">
-              {users &&
-                users.map(user => (
-                  <Indicator key={user._id} username={user.username} />
-                ))}
-            </div>
+
             <TopArrow
               scrollToTopWithContainer={this.scrollToTopWithContainer}
             />
@@ -112,15 +93,16 @@ class App extends React.Component {
   }
 }
 
-export default withTracker(() => {
+export default withTracker(({ location }) => {
   Meteor.subscribe("messages");
-  Meteor.subscribe("users");
+  Meteor.subscribe("chats");
 
   return {
-    messages: Messages.find({}).fetch(),
-    currentUser: Meteor.user(),
-    users: Users.find({
-      $and: [{ typing: { $eq: true } }]
+    messages: Messages.find({
+      chat: { $eq: location.pathname.split("/")[2] }
+    }).fetch(),
+    chats: Chats.find({
+      _id: { $eq: location.pathname.split("/")[2] }
     }).fetch()
   };
-})(App);
+})(withRouter(Chat));

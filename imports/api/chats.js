@@ -11,16 +11,16 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  "chats.insert"(person) {
+  "chats.insert"(user) {
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
 
     return Chats.insert({
-      user: person._id,
-      username: person.username,
+      user: user._id,
       createdAt: new Date(),
-      owner: this.userId
+      owner: this.userId,
+
     });
   },
   "chats.remove"(chatId) {

@@ -1,10 +1,10 @@
 import { Form, Text, withFormApi } from "informed";
 import React from "react";
 
-const InputBar = ({ scrollToWithContainer }) => {
+const InputBar = ({ scroll, chat }) => {
   onSubmitMessage = ({ text }) => {
-    Meteor.call("messages.insert", text);
-    scrollToWithContainer();
+    Meteor.call("messages.insert", text, chat);
+    scroll();
     resetForm();
     Meteor.call("users.setState", false);
   };

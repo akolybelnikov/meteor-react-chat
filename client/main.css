@@ -155,14 +155,11 @@ body {
   }
 }
 
-.chat-text {
-  padding: 1rem 4rem;
-}
-
 #typing-alert {
   position: absolute;
-  bottom: 25px;
-  left: 15px;
+  top: 1px;
+  left: 1px;
+  z-index: 20;
 }
 
 @media screen and (max-width: 767px) {
