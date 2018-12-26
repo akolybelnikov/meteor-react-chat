@@ -56,9 +56,8 @@ body {
 
 .tool-bar {
   left: 50% !important;
-  margin-left: -293px;
+  margin-left: -275px;
   width: 600px;
-  padding: 0 1.5rem !important;
 }
 
 .container {
