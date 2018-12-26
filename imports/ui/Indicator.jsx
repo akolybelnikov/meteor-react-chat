@@ -5,20 +5,21 @@ import { Users } from "../api/users";
 
 const Indicator = props => {
   const { users } = props;
-  console.log(users);
   return (
-    <div className="indicator">
-      <p className="tag is-info typing-tag">
-        <span style={{ marginRight: "5px" }}>
-          {users.length && users[0].username}
-        </span>
-        {users.length && users[0].typing === true && (
-          <span>
-            is typing <Dots />
-          </span>
-        )}
-      </p>
-    </div>
+    <React.Fragment>
+      {users.length && users[0].typing && (
+        <div className="indicator">
+          <p className="tag is-info typing-tag">
+            <span style={{ marginRight: "5px" }}>
+              {users.length && users[0].username}
+            </span>
+            <span>
+              is typing <Dots />
+            </span>
+          </p>
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 

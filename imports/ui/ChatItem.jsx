@@ -2,10 +2,20 @@ import { withTracker } from "meteor/react-meteor-data";
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Users } from "../api/users";
+import { Chats } from "../api/chats";
 import Avatar from "./AvatarMock";
 
-const ChatItem = ({ chat, history, users }) => {
-  onGoToChat = () => history.push(`/chats/${chat._id}`);
+const ChatItem = ({ chats, history, user }) => {
+  onGoToChat = () => {
+    if (chats.length) {
+      history.push(`/chats/${chats[0]._id}`);
+    } else {
+      Meteor.call("chats.insert", user, function(_, result) {
+        history.push(`/chats/${result}`);
+      });
+    }
+  };
+  
   return (
     <article
       className="media has-background-white-bis"
@@ -14,7 +24,7 @@ const ChatItem = ({ chat, history, users }) => {
       <Avatar name={"media-left"} />
       <div className="media-content">
         <div className="field">
-          <p className="control">{users[0].username}</p>
+          <p className="control">{user.username}</p>
         </div>
       </div>
       <div style={{ margin: "0 1rem" }} className="media-right">
@@ -28,22 +38,37 @@ const ChatItem = ({ chat, history, users }) => {
   );
 };
 
-export default withTracker(({ chat }) => {
+export default withTracker(({ user }) => {
   Meteor.subscribe("users");
   return {
-    currentUser: Meteor.user(),
-    users: Users.find({
+    chats: Chats.find({
       $or: [
         {
-          $and: [{ _id: { $eq: chat.user } }, { _id: { $ne: Meteor.userId() } }]
+          $and: [
+            { user: { $eq: user._id } },
+            { owner: { $eq: Meteor.userId() } }
+          ]
         },
         {
           $and: [
-            { _id: { $eq: chat.owner } },
-            { _id: { $ne: Meteor.userId() } }
+            { owner: { $eq: user._id } },
+            { user: { $eq: Meteor.userId() } }
           ]
         }
       ]
     }).fetch()
+    // users: Users.find({
+    //   $or: [
+    //     {
+    //       $and: [{ _id: { $eq: chat.user } }, { _id: { $ne: Meteor.userId() } }]
+    //     },
+    //     {
+    //       $and: [
+    //         { _id: { $eq: chat.owner } },
+    //         { _id: { $ne: Meteor.userId() } }
+    //       ]
+    //     }
+    //   ]
+    // }).fetch()
   };
 })(withRouter(ChatItem));

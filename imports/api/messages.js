@@ -27,11 +27,11 @@ Meteor.methods({
       checked: false
     });
   },
-  "messages.markAsRead"() {
+  "messages.markAsRead"(id) {
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
 
-    Users.update(this.userId, { $set: { typing: state } });
+    Messages.update(id, { $set: { checked: true } });
   }
 });

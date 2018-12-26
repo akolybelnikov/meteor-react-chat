@@ -3,26 +3,21 @@ import React from "react";
 import { Chats } from "../api/chats";
 import { Messages } from "../api/messages";
 import { Users } from "../api/users";
-import Footer from "./Footer";
-import Header from "./Header";
-import Grid from "./SVG/grid";
 import ErrorBoundary from "./Error";
+import Header from "./Header";
 import Routes from "./Routes";
+import Grid from "./SVG/grid";
 
 class App extends React.Component {
-  state = {
-    activeState: "chats"
-  };
   render() {
     const { currentUser, users, chats } = this.props;
     const childProps = {
-      activeState: this.state.activeState,
       users: users,
       chats: chats
     };
     return (
-      <ErrorBoundary>
-        <React.Fragment>
+      <React.Fragment>
+        <ErrorBoundary>
           <Header currentUser={currentUser} />
           {!currentUser && (
             <div id="grid">
@@ -34,14 +29,10 @@ class App extends React.Component {
           {currentUser && (
             <React.Fragment>
               <Routes childProps={childProps} />
-              <Footer
-                users={() => this.setState({ activeState: "users" })}
-                chats={() => this.setState({ activeState: "chats" })}
-              />
             </React.Fragment>
           )}
-        </React.Fragment>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </React.Fragment>
     );
   }
 }

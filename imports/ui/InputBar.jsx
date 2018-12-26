@@ -3,7 +3,12 @@ import React from "react";
 
 const InputBar = ({ scroll, chat }) => {
   onSubmitMessage = ({ text }) => {
-    Meteor.call("messages.insert", text, chat);
+    if (text) {
+      const message = text.trim();
+      if (message !== "") {
+        Meteor.call("messages.insert", message, chat);
+      }
+    }
     scroll();
     resetForm();
     Meteor.call("users.setState", false);
@@ -29,7 +34,7 @@ const InputBar = ({ scroll, chat }) => {
       style={{
         padding: `0 .5rem`,
         position: `fixed`,
-        bottom: '3.75rem',
+        bottom: "0.75rem",
         zIndex: 10
       }}
     >

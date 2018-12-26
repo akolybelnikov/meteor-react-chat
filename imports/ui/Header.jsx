@@ -1,9 +1,16 @@
 import React from "react";
 import AccountsUiWrapper from "./AccountsUiWrapper";
+import GoBackArrow from "./GoBackArrow";
+import { withRouter } from "react-router-dom";
 
-export default ({ currentUser }) => (
+const Header = ({ currentUser, location }) => (
   <nav className="navbar is-primary is-fixed-top tool-bar">
     <div className="navbar-brand">
+      {location.pathname !== "/" && (
+        <div className="navbar-item">
+          <GoBackArrow />
+        </div>
+      )}
       <div
         className="navbar-item has-text-dark"
         style={{ flex: `1 1 auto`, justifyContent: "flex-end" }}
@@ -17,3 +24,5 @@ export default ({ currentUser }) => (
     </div>
   </nav>
 );
+
+export default withRouter(Header);
